@@ -1,5 +1,6 @@
 import Cards from "../../components/Cards";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDrinks } from "../../Providers/Drinks";
 
 const useStyles = makeStyles({
   root: {
@@ -10,15 +11,28 @@ const useStyles = makeStyles({
     padding: "20px",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems: "stretch",
   },
 });
 
 const Home = () => {
+  const { beers } = useDrinks();
+
+  console.log(beers);
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Cards />
+      {beers.map((ele) => (
+        <Cards
+          name={ele.name}
+          image={ele.image_url}
+          tag={ele.tagline}
+          brewed={ele.first_brewed}
+          volume={ele.boil_volume.value}
+        />
+      ))}
     </div>
   );
 };

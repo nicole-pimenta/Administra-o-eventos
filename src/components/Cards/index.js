@@ -10,62 +10,80 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 380,
+    width: 280,
+    margin: " 6px",
+    borderRadius: "10px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
   },
   media: {
-    height: 140,
+    height: "280px",
+    width: "30%",
+    objectFit: "scale-down",
+    margin: "10px auto",
+  },
+
+  displayButtons: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  button: {
+    margin: "5px",
   },
 });
 
-const Cards = () => {
+const Cards = ({ name, image, tag, brewed, volume }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
+        <CardMedia className={classes.media} image={image} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+          <Typography gutterBottom variant="h5" component="h3">
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {tag}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {brewed}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {volume} litres
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Wedding
-        </Button>
-        <Button size="small" color="primary">
-          Graduation
-        </Button>
-        <Button size="small" color="primary">
+      <CardActions className={classes.displayButtons}>
+        <div>
+          <Button
+            size="small"
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+          >
+            Wedding
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+          >
+            Graduation
+          </Button>
+        </div>
+        <Button
+          size="small"
+          variant="outlined"
+          color="secondary"
+          className={classes.button}
+        >
           Confraternization
         </Button>
       </CardActions>
-
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
     </Card>
   );
 };
