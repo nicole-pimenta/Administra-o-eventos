@@ -1,25 +1,30 @@
 import { useHistory } from "react-router-dom";
 import { AppBar, Toolbar, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg, #BA5370 90%, #F4E2D8 20%)",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
-    height: 48,
-    padding: "0 10px",
+    height: 76,
 
-    justifyContent: "center",
+    marginBottom: "5px;",
+    boxSizing: "border-box",
   },
 
   Toolbar: {
     display: "flex",
-    justifyContent: "space-around",
-    width: "40%",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: "-5px",
+    width: "80%",
     margin: "0 auto",
-    marginLeft: "49%",
   },
+
+  item: {},
 });
 
 const Header = () => {
@@ -34,10 +39,20 @@ const Header = () => {
     <AppBar position="static" className={classes.root}>
       <Toolbar className={classes.Toolbar}>
         <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
-        <MenuItem onClick={() => sendTo("/wedding")}>Wedding</MenuItem>
-        <MenuItem onClick={() => sendTo("/graduation")}> Graduation </MenuItem>
-        <MenuItem onClick={() => sendTo("/confraternization")}>
+        <MenuItem
+          onClick={() => sendTo("/confraternization")}
+          className={classes.item}
+        >
           Confraternization
+        </MenuItem>
+        <MenuItem onClick={() => sendTo("/wedding")} className={classes.item}>
+          Wedding
+        </MenuItem>
+        <MenuItem
+          onClick={() => sendTo("/graduation")}
+          className={classes.item}
+        >
+          Graduation
         </MenuItem>
       </Toolbar>
     </AppBar>

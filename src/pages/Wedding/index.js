@@ -6,10 +6,11 @@ const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg,  #ECE9E6 20%, #E4E5E6 80%)",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-    color: "brown",
-    height: "100vh",
+    color: "white",
+    height: "100%",
     padding: " 0 20px",
     display: "flex",
+    flexWrap: "wrap",
   },
 });
 
@@ -22,7 +23,7 @@ const Wedding = () => {
   return (
     <div className={classes.root}>
       {weddingList.map((drink) => (
-        <Cards beer={drink} createButton />
+        <Cards key={drink.id} beer={drink} buttonCondition />
       ))}
     </div>
   );

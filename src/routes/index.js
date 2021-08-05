@@ -4,6 +4,8 @@ import Wedding from "../pages/Wedding";
 import Graduation from "../pages/Graduation";
 import Confraternization from "../pages/Confraternization";
 
+console.log("route");
+
 const Routes = () => {
   return (
     <Switch>

@@ -8,6 +8,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useWeddingList } from "../../Providers/Wedding";
+import { useGraduationList } from "../../Providers/Graduation";
+import { useConfraternizationList } from "../../Providers/Confraternization";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -36,12 +39,26 @@ const useStyles = makeStyles({
   },
 });
 
-const Cards = ({ beer, createButton }) => {
+const Cards = ({ beer, buttonCondition }) => {
   const classes = useStyles();
-
   const { name, image_url, tagline, first_brewed, volume } = beer;
+  const { addToWeddingList, removeFromWeddingList } = useWeddingList();
+  const { addToGraduationList, removeFromGraduationList } = useGraduationList();
+  const { addToConfraternizationList, removeFromConfraternizationList } =
+    useConfraternizationList();
+  const history = useHistory();
 
-  const { addToList } = useWeddingList();
+  const removeItem = (item) => {
+    if (history.location.pathname === "/graduation") {
+      removeFromGraduationList(item);
+    }
+    if (history.location.pathname === "/wedding") {
+      removeFromWeddingList(item);
+    }
+    if (history.location.pathname === "/confraternization") {
+      removeFromConfraternizationList(item);
+    }
+  };
 
   return (
     <Card className={classes.root}>
@@ -63,13 +80,14 @@ const Cards = ({ beer, createButton }) => {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.displayButtons}>
-        {createButton === true ? (
+        {buttonCondition === true ? (
           <div>
             <Button
               size="small"
               variant="outlined"
               color="secondary"
               className={classes.button}
+              onClick={() => removeItem(beer.id)}
             >
               Remove Item
             </Button>
@@ -81,17 +99,9 @@ const Cards = ({ beer, createButton }) => {
               variant="outlined"
               color="secondary"
               className={classes.button}
-              onClick={() => addToList(beer)}
+              onClick={() => addToWeddingList(beer)}
             >
               Wedding
-            </Button>
-            <Button
-              size="small"
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-            >
-              Graduation
             </Button>
 
             <Button
@@ -99,6 +109,16 @@ const Cards = ({ beer, createButton }) => {
               variant="outlined"
               color="secondary"
               className={classes.button}
+              onClick={() => addToGraduationList(beer)}
+            >
+              Graduation
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              className={classes.button}
+              onClick={() => addToConfraternizationList(beer)}
             >
               Confraternization
             </Button>

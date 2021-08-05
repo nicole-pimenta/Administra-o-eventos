@@ -5,17 +5,18 @@ const WeddingListContext = createContext();
 export const WeddingProvider = ({ children }) => {
   const [weddingList, setWeddingList] = useState([]);
 
-  const addToList = (drink) => {
+  const addToWeddingList = (drink) => {
     setWeddingList([...weddingList, drink]);
   };
 
-  const removeFromList = (id) => {
+  const removeFromWeddingList = (id) => {
     const filteredList = weddingList.filter((drink) => drink.id !== id);
+    setWeddingList(filteredList);
   };
 
   return (
     <WeddingListContext.Provider
-      value={{ addToList, removeFromList, weddingList }}
+      value={{ addToWeddingList, removeFromWeddingList, weddingList }}
     >
       {children}
     </WeddingListContext.Provider>
