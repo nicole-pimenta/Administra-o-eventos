@@ -19,19 +19,11 @@ const useStyles = makeStyles({
 const Home = () => {
   const { beers } = useDrinks();
 
-  console.log(beers);
-
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {beers.map((ele) => (
-        <Cards
-          name={ele.name}
-          image={ele.image_url}
-          tag={ele.tagline}
-          brewed={ele.first_brewed}
-          volume={ele.boil_volume.value}
-        />
+      {beers.map((beer) => (
+        <Cards key={beer.id} beer={beer} />
       ))}
     </div>
   );

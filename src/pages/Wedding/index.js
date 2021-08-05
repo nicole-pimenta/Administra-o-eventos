@@ -1,4 +1,6 @@
 import { makeStyles } from "@material-ui/core";
+import { useWeddingList } from "../../Providers/Wedding";
+import Cards from "../../components/Cards";
 
 const useStyles = makeStyles({
   root: {
@@ -7,14 +9,21 @@ const useStyles = makeStyles({
     color: "brown",
     height: "100vh",
     padding: " 0 20px",
+    display: "flex",
   },
 });
 
 const Wedding = () => {
   const classes = useStyles();
+
+  const { weddingList } = useWeddingList();
+
+  console.log(weddingList);
   return (
     <div className={classes.root}>
-      <div>hahahahaah</div>
+      {weddingList.map((drink) => (
+        <Cards beer={drink} createButton />
+      ))}
     </div>
   );
 };
